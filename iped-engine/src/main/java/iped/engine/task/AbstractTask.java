@@ -18,7 +18,7 @@ import iped.engine.core.Worker;
 import iped.engine.core.Worker.STATE;
 import iped.engine.data.CaseData;
 import iped.engine.io.TimeoutException;
-import iped.exception.IPEDException;
+import iped.engine.util.FilePathFilter;
 import iped.parsers.util.CorruptedCarvedException;
 
 /**
@@ -63,10 +63,20 @@ public abstract class AbstractTask {
      * Próxima tarefa que será executada no pipeline.
      */
     protected AbstractTask nextTask;
+    
+    /**
+     * Filter allowed paths, if null on concrete task object, ignore filter.
+     * Worker will check if it is null
+     */
+    protected FilePathFilter fpFilter = null;
 
     private long taskTime;
 
     private HashMap<Integer, Long> subitemProcessingTime = new HashMap<Integer, Long>();
+    
+    public boolean hasFilePathFilter() {
+    	if (fpFilter==null) return false; else return true;
+    }
 
     public long getTaskTime() {
         return taskTime;
@@ -191,7 +201,7 @@ public abstract class AbstractTask {
 
         boolean sendToNextTask = true;
 
-        if (this.isEnabled() && (!evidence.isToIgnore() || processIgnoredItem())) {
+        if (this.isEnabled() && isFilteredIn(evidence) && (!evidence.isToIgnore() || processIgnoredItem())) {
             long t = System.nanoTime() / 1000;
             try {
                 processMonitorTimeout(evidence);
@@ -214,6 +224,10 @@ public abstract class AbstractTask {
         worker.runningTask = prevTask;
 
     }
+    public final void jumpToNextTask(IItem evidence) throws Exception{
+    	sendToNextTask(evidence);
+	}
+    
 
     /**
      * Envia o item para a próxima tarefa que será executada.
@@ -338,24 +352,13 @@ public abstract class AbstractTask {
     public void interrupted() {
     }
 
-    protected void checkDependency(Class<? extends AbstractTask> requiredTask) throws IPEDException {
-        if (Manager.getInstance() != null) {
-            Worker[] workers = Manager.getInstance().getWorkers();
-            String requiredName = requiredTask.getName();
-            if (workers != null) {
-                List<AbstractTask> tasks = workers[0].tasks;
-                for (AbstractTask task : tasks) {
-                    if (task.getClass().equals(requiredTask)) {
-                        requiredName = task.getName();
-                        if (task.isEnabled()) {
-                            return;
-                        }
-                        break;
-                    }
-                }
-            }
-            String msg = getName() + " requires that " + requiredName + " is enabled!";
-            throw new IPEDException(msg);
-        }
-    }
+	public boolean isFilteredIn(IItem evidence) {
+		if (fpFilter==null) {
+				return true;
+		}
+		else {			
+				return fpFilter.allow(evidence.getPath());
+		}
+		
+	}
 }

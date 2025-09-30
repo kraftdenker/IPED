@@ -7,7 +7,7 @@
 # Default implementation uses Vosk transcription on local CPU (slow and medium quality).
 # We include small portable models for 'en' and 'pt-BR', if you want to use a different language model
 # you should download it from https://alphacephei.com/vosk/models and put in 'models/vosk/[lang]' folder.
-implementationClass = iped.engine.task.transcript.VoskTranscriptTask
+#implementationClass = iped.engine.task.transcript.VoskTranscriptTask
 
 # Uses a local wav2vec2 implementation for transcription. Accuracy is much better than most Vosk models.
 # This is up to 10x slower than Vosk on high end CPUs. Using a good GPU is highly recommended!
@@ -38,6 +38,23 @@ implementationClass = iped.engine.task.transcript.VoskTranscriptTask
 # You can download an all-in-one jar from https://gitlab.com/iped-project/iped-maven/-/blob/master/com/google/cloud/google-cloud-speech/1.22.5-shaded/google-cloud-speech-1.22.5-shaded.jar
 # Finally you must set environment variable GOOGLE_APPLICATION_CREDENTIALS pointing to your credential file
 #implementationClass = iped.engine.task.transcript.GoogleTranscriptTask
+
+# If you want to use the IC service implementation, comment above and uncomment below.
+# You must pass your authorization key using command line parameter -XicAuthorizationKey=XXXXXXXX
+implementationClass = iped.engine.task.transcript.ICTranscriptTask
+
+#filePath regex whitelist
+#Files in directories containing term 'whatsapp' and having extension ".opus"
+whiteListRegEx=(.*)whatsapp(.*).opus;
+
+#########################################
+# ICTranscriptTask options
+#########################################
+language = Portuguese
+maxConcurrentRequests = 24
+#Model size to use (e.g., small, medium, large). prefix FS = FasterWhisppers
+whisperModel = fs:medium
+remoteServiceAddress = server.br
 
 #########################################
 # Global options

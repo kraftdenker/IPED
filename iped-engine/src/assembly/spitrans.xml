@@ -1,0 +1,20 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3
+          http://maven.apache.org/xsd/assembly-1.1.3.xsd">
+    <id>single-class</id>
+    <formats>
+        <format>jar</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <!-- Diretório base onde as classes compiladas estão localizadas -->
+            <directory>${project.build.outputDirectory}</directory>
+            <includes>
+                <!-- Inclua apenas a classe desejada -->
+                <include>iped/engine/task/transcript/ICTranscriptTask.class</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</assembly>

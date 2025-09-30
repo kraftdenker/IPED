@@ -103,7 +103,7 @@ enableOCR = false
 # - Whisper algorithm (much slower but better accuracy)
 # - Google Cloud (about $1.00 per hour cost)
 # - Microsoft Azure (about $1.00 per hour cost)
-enableAudioTranscription = false
+enableAudioTranscription = true
 
 # Enables carving. "addUnallocated" must be enabled to scan unallocated space.
 # By default, our carving module scans many places in the evidence for deleted or embedded files. 

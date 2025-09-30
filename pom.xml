@@ -21,6 +21,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.compilerVersion>11</maven.compiler.compilerVersion>
+        <java.version>11</java.version>
         <resources.dir>${basedir}/resources</resources.dir>
         <release.dir>${project.build.directory}/release/iped-${project.version}</release.dir>  
         <lib.dir>${release.dir}/lib</lib.dir>
@@ -68,7 +70,7 @@
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
-        </repository>
+        </repository        >
     </repositories>
 
     <dependencies>
