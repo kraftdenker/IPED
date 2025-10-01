@@ -31,6 +31,7 @@ import iped.engine.config.FileSystemConfig;
 import iped.engine.config.LocalConfig;
 import iped.engine.config.PluginConfig;
 import iped.engine.core.Manager;
+import iped.engine.datasource.SleuthkitReader;
 import iped.engine.sleuthkit.SleuthkitServer.FLAGS;
 import iped.io.SeekableInputStream;
 
@@ -52,6 +53,8 @@ public class SleuthkitClient implements Comparable<SleuthkitClient> {
 
     private static volatile File tskDb;
     private static AtomicInteger idStart = new AtomicInteger();
+
+    private static final AtomicBoolean initSleuthkitServers = new AtomicBoolean(false);
 
     private static final AtomicBoolean initSleuthkitServers = new AtomicBoolean(false);
 
