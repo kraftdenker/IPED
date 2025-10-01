@@ -224,5 +224,4 @@ public class WhisperTranscriptTask extends Wav2Vec2TranscriptTask {
         t.setDaemon(true);
         t.start();
     }
-
 }

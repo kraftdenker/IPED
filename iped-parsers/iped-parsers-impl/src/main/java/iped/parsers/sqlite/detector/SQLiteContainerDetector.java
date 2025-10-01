@@ -144,20 +144,7 @@ public class SQLiteContainerDetector implements Detector {
                 tableNames.contains("wa_contact_capabilities") && //$NON-NLS-1$
                 tableNames.contains("sqlite_sequence")) //$NON-NLS-1$
             return WhatsAppParser.WA_DB;
-        // ##### WhatsApp Desktop #####
-        if (tableNames.contains("Conversations") && //$NON-NLS-1$
-            tableNames.contains("Messages") && //$NON-NLS-1$
-            tableNames.contains("GroupParticipants") && //$NON-NLS-1$
-            tableNames.contains("LocalFiles") && //$NON-NLS-1$
-            tableNames.contains("ReceiptStates") && //$NON-NLS-1$
-            tableNames.contains("sqlite_sequence")) //$NON-NLS-1$
-        return WhatsAppParser.MESSAGES_Desktop;
 
-        if (tableNames.contains("UserStatuses") && //$NON-NLS-1$
-            tableNames.contains("ChatPictures") && //$NON-NLS-1$
-            tableNames.contains("sqlite_sequence")) //$NON-NLS-1$
-        return WhatsAppParser.CONTACTS_Desktop;
-        // ##############################
         if (tableNames.contains("ZWACHATSESSION") && //$NON-NLS-1$
                 tableNames.contains("ZWAMESSAGE") && //$NON-NLS-1$
                 tableNames.contains("ZWAMEDIAITEM") && //$NON-NLS-1$

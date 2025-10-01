@@ -156,8 +156,6 @@ public class DIETask extends AbstractTask {
 
                 externalImageConverter = new ExternalImageConverter();
 
-                checkDependency(HashTask.class);                
-
                 init.set(true);
             }
         }

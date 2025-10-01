@@ -56,8 +56,6 @@ public class SleuthkitClient implements Comparable<SleuthkitClient> {
 
     private static final AtomicBoolean initSleuthkitServers = new AtomicBoolean(false);
 
-    private static final AtomicBoolean initSleuthkitServers = new AtomicBoolean(false);
-
     static {
         if (Manager.getInstance() != null) {
             FileSystemConfig config = ConfigurationManager.get().findObject(FileSystemConfig.class);

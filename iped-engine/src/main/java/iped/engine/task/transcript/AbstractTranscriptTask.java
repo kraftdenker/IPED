@@ -200,9 +200,7 @@ public abstract class AbstractTranscriptTask extends AbstractTask {
             createConnection();
         }
 
-        if (transcriptConfig.isEnabled()) {
-            checkDependency(HashTask.class);
-        }
+        
     }
 
     public static TextAndScore transcribeWavBreaking(File tmpFile, String itemPath,

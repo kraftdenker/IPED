@@ -68,9 +68,6 @@ public class ImageSimilarityTask extends AbstractTask {
                     return;
                 }
 
-                checkDependency(HashTask.class);
-                checkDependency(ImageThumbTask.class);
-                
                 logger.info("Task enabled."); //$NON-NLS-1$
                 init.set(true);
             }

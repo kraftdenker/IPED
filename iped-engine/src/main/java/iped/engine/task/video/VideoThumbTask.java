@@ -251,7 +251,7 @@ public class VideoThumbTask extends ThumbTask {
                     logger.info("Task enabled."); //$NON-NLS-1$
                     logger.info("MPLAYER version: " + vmp); //$NON-NLS-1$
                 }
-                checkDependency(HashTask.class);
+                
                 init.set(true);
             }
         }
